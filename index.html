@@ -420,9 +420,13 @@ Total Records
 
 </div>
 
-<div class="stat-number" id="totalCount">
+<div
+class="stat-number"
+id="totalCount">
 
 0
+
+</div>
 
 </div>
 
@@ -708,6 +712,19 @@ function updateDashboardStats() {
         deathRecords.length;
     document.getElementById("totalCount").innerText =
     birthRecords.length + deathRecords.length;
+}
+
+updateDashboardStats();
+    function updateDashboardStats() {
+
+    const birthRecords =
+        JSON.parse(localStorage.getItem("birthRecords")) || [];
+
+    const deathRecords =
+        JSON.parse(localStorage.getItem("deathRecords")) || [];
+
+    document.getElementById("totalCount").innerText =
+        birthRecords.length + deathRecords.length;
 }
 
 updateDashboardStats();
