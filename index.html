@@ -1,16 +1,697 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Birth & Death Registration Portal</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Birth & Death Registration Management System
+</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,"Noto Sans Devanagari",sans-serif;
+background:#f3f6fa;
+color:#1f2937;
+}
+
+/* HEADER */
+
+.header{
+background:#123b63;
+color:white;
+padding:18px 25px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.header-left{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo{
+width:55px;
+height:55px;
+border-radius:50%;
+background:white;
+color:#123b63;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:25px;
+font-weight:bold;
+}
+
+.header h1{
+margin:0;
+font-size:22px;
+}
+
+.header p{
+margin:5px 0 0;
+opacity:.85;
+}
+
+.lang-btn{
+background:white;
+color:#123b63;
+border:none;
+padding:9px 14px;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* NAVIGATION */
+
+.nav{
+background:white;
+padding:12px 25px;
+border-bottom:1px solid #ddd;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.nav button{
+border:none;
+padding:10px 16px;
+border-radius:6px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.nav-main{
+background:#1769aa;
+color:white;
+}
+
+.nav-other{
+background:#e8eef5;
+color:#123b63;
+}
+
+/* MAIN */
+
+.container{
+max-width:1200px;
+margin:25px auto;
+padding:0 18px;
+}
+
+/* WELCOME */
+
+.welcome{
+background:white;
+padding:22px;
+border-radius:10px;
+box-shadow:0 2px 8px #00000012;
+margin-bottom:20px;
+}
+
+.welcome h2{
+margin-top:0;
+color:#123b63;
+}
+
+/* STATISTICS */
+
+.stats{
+display:grid;
+grid-template-columns:
+repeat(3,1fr);
+gap:18px;
+}
+
+.stat{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px #00000012;
+}
+
+.stat-title{
+font-size:15px;
+color:#64748b;
+}
+
+.stat-number{
+font-size:32px;
+font-weight:bold;
+color:#1769aa;
+margin-top:8px;
+}
+
+/* ACTIONS */
+
+.actions{
+display:grid;
+grid-template-columns:
+repeat(3,1fr);
+gap:18px;
+margin-top:20px;
+}
+
+.action{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 2px 8px #00000012;
+cursor:pointer;
+transition:.2s;
+}
+
+.action:hover{
+transform:translateY(-2px);
+box-shadow:0 5px 15px #00000020;
+}
+
+.action-icon{
+font-size:32px;
+}
+
+.action h3{
+color:#123b63;
+margin-bottom:8px;
+}
+
+.action p{
+color:#64748b;
+}
+
+/* RECENT */
+
+.recent{
+background:white;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 8px #00000012;
+margin-top:20px;
+}
+
+.recent h2{
+margin-top:0;
+color:#123b63;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,td{
+padding:11px;
+border-bottom:1px solid #e5e7eb;
+text-align:left;
+}
+
+th{
+background:#eef4f9;
+}
+
+/* FOOTER */
+
+.footer{
+margin-top:40px;
+background:#123b63;
+color:white;
+padding:18px;
+text-align:center;
+font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.stats{
+grid-template-columns:1fr;
+}
+
+.actions{
+grid-template-columns:1fr;
+}
+
+.header{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-<h1>Birth & Death Registration Portal</h1>
 
-<h2>नगर पंचायत आनंदनगर</h2>
+<!-- HEADER -->
 
-<p>Demo portal is working.</p>
+<div class="header">
+
+<div class="header-left">
+
+<div class="logo">
+NP
+</div>
+
+<div>
+
+<h1 id="title">
+Birth & Death Registration Management System
+</h1>
+
+<p id="subtitle">
+Nagar Panchayat Anandnagar
+</p>
+
+</div>
+
+</div>
+
+<button
+class="lang-btn"
+onclick="toggleLanguage()"
+id="languageButton">
+
+हिंदी
+
+</button>
+
+</div>
+
+
+<!-- NAVIGATION -->
+
+<div class="nav">
+
+<button
+class="nav-main"
+id="dashboardButton">
+
+Dashboard
+
+</button>
+
+<button
+class="nav-other"
+id="birthButton">
+
+Birth Registration
+
+</button>
+
+<button
+class="nav-other"
+id="deathButton">
+
+Death Registration
+
+</button>
+
+<button
+class="nav-other"
+id="searchButton">
+
+Search Records
+
+</button>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+
+<!-- WELCOME -->
+
+<div class="welcome">
+
+<h2 id="welcomeTitle">
+Birth & Death Registration
+</h2>
+
+<p id="welcomeText">
+
+Digital record management system for
+birth and death registration records
+maintained by Nagar Panchayat Anandnagar.
+
+</p>
+
+</div>
+
+
+<!-- STATISTICS -->
+
+<div class="stats">
+
+
+<div class="stat">
+
+<div
+class="stat-title"
+id="birthRecords">
+
+Total Birth Records
+
+</div>
+
+<div
+class="stat-number">
+
+0
+
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div
+class="stat-title"
+id="deathRecords">
+
+Total Death Records
+
+</div>
+
+<div
+class="stat-number">
+
+0
+
+</div>
+
+</div>
+
+
+<div class="stat">
+
+<div
+class="stat-title"
+id="totalRecords">
+
+Total Records
+
+</div>
+
+<div
+class="stat-number">
+
+0
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- QUICK ACTIONS -->
+
+<div class="actions">
+
+
+<div
+class="action"
+onclick="comingSoon()">
+
+<div class="action-icon">
+👶
+</div>
+
+<h3 id="addBirth">
+Add Birth Record
+</h3>
+
+<p id="addBirthText">
+
+Enter and save a new birth
+registration record.
+
+</p>
+
+</div>
+
+
+<div
+class="action"
+onclick="comingSoon()">
+
+<div class="action-icon">
+🕊️
+</div>
+
+<h3 id="addDeath">
+Add Death Record
+</h3>
+
+<p id="addDeathText">
+
+Enter and save a new death
+registration record.
+
+</p>
+
+</div>
+
+
+<div
+class="action"
+onclick="comingSoon()">
+
+<div class="action-icon">
+🔎
+</div>
+
+<h3 id="searchRecords">
+Search Records
+</h3>
+
+<p id="searchText">
+
+Search registered records by name,
+registration number or date.
+
+</p>
+
+</div>
+
+
+</div>
+
+
+<!-- RECENT RECORDS -->
+
+<div class="recent">
+
+<h2 id="recentTitle">
+Recent Registrations
+</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th id="typeHead">
+Type
+</th>
+
+<th id="registrationHead">
+Registration Number
+</th>
+
+<th id="nameHead">
+Name
+</th>
+
+<th id="dateHead">
+Date
+
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td colspan="4"
+style="text-align:center;color:#64748b"
+id="noRecords">
+
+No records available
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+</div>
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<span id="footerText">
+
+Nagar Panchayat Anandnagar |
+Birth & Death Registration Management System |
+Demonstration Portal
+
+</span>
+
+</div>
+
+
+<script>
+
+let hindi=false;
+
+
+function toggleLanguage(){
+
+hindi=!hindi;
+
+
+if(hindi){
+
+document.getElementById("title").innerText=
+"जन्म एवं मृत्यु पंजीकरण प्रबंधन प्रणाली";
+
+document.getElementById("subtitle").innerText=
+"नगर पंचायत आनंदनगर";
+
+document.getElementById("languageButton").innerText=
+"English";
+
+document.getElementById("dashboardButton").innerText=
+"डैशबोर्ड";
+
+document.getElementById("birthButton").innerText=
+"जन्म पंजीकरण";
+
+document.getElementById("deathButton").innerText=
+"मृत्यु पंजीकरण";
+
+document.getElementById("searchButton").innerText=
+"रिकॉर्ड खोजें";
+
+document.getElementById("welcomeTitle").innerText=
+"जन्म एवं मृत्यु पंजीकरण";
+
+document.getElementById("welcomeText").innerText=
+"नगर पंचायत आनंदनगर द्वारा किए गए जन्म एवं मृत्यु पंजीकरण अभिलेखों के डिजिटल प्रबंधन हेतु प्रणाली।";
+
+document.getElementById("birthRecords").innerText=
+"कुल जन्म रिकॉर्ड";
+
+document.getElementById("deathRecords").innerText=
+"कुल मृत्यु रिकॉर्ड";
+
+document.getElementById("totalRecords").innerText=
+"कुल रिकॉर्ड";
+
+document.getElementById("addBirth").innerText=
+"जन्म रिकॉर्ड जोड़ें";
+
+document.getElementById("addBirthText").innerText=
+"नया जन्म पंजीकरण रिकॉर्ड दर्ज करें और सुरक्षित करें।";
+
+document.getElementById("addDeath").innerText=
+"मृत्यु रिकॉर्ड जोड़ें";
+
+document.getElementById("addDeathText").innerText=
+"नया मृत्यु पंजीकरण रिकॉर्ड दर्ज करें और सुरक्षित करें।";
+
+document.getElementById("searchRecords").innerText=
+"रिकॉर्ड खोजें";
+
+document.getElementById("searchText").innerText=
+"नाम, पंजीकरण संख्या या तारीख के आधार पर रिकॉर्ड खोजें।";
+
+document.getElementById("recentTitle").innerText=
+"हाल के पंजीकरण";
+
+document.getElementById("typeHead").innerText=
+"प्रकार";
+
+document.getElementById("registrationHead").innerText=
+"पंजीकरण संख्या";
+
+document.getElementById("nameHead").innerText=
+"नाम";
+
+document.getElementById("dateHead").innerText=
+"तारीख";
+
+document.getElementById("noRecords").innerText=
+"कोई रिकॉर्ड उपलब्ध नहीं है";
+
+document.getElementById("footerText").innerText=
+"नगर पंचायत आनंदनगर | जन्म एवं मृत्यु पंजीकरण प्रबंधन प्रणाली | प्रदर्शन पोर्टल";
+
+}
+
+else{
+
+location.reload();
+
+}
+
+}
+
+
+function comingSoon(){
+
+alert(
+
+hindi
+
+?
+
+"यह मॉड्यूल अगले चरण में सक्रिय किया जाएगा।"
+
+:
+
+"This module will be activated in the next stage."
+
+);
+
+}
+
+</script>
 
 </body>
+
 </html>
