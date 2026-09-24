@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Death Registration</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f6f8;
+}
+
+.header{
+    background:#17365d;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.header h1{
+    margin:0;
+    font-size:24px;
+}
+
+.header p{
+    margin:6px 0 0;
+}
+
+.container{
+    max-width:900px;
+    margin:30px auto;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+h2{
+    color:#17365d;
+}
+
+button{
+    border:none;
+    padding:11px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.lang{
+    background:#f0ad4e;
+    color:white;
+}
+
+.back{
+    background:#6c757d;
+    color:white;
+}
+
+.save{
+    background:#198754;
+    color:white;
+}
+
+.reset{
+    background:#dc3545;
+    color:white;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:1 / -1;
+}
+
+label{
+    font-weight:bold;
+    margin-bottom:6px;
+}
+
+input, select, textarea{
+    padding:11px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+textarea{
+    min-height:80px;
+    resize:vertical;
+}
+
+.actions{
+    margin-top:25px;
+    display:flex;
+    gap:12px;
+    justify-content:center;
+}
+
+.success{
+    display:none;
+    margin-top:20px;
+    padding:12px;
+    background:#d1e7dd;
+    color:#0f5132;
+    border-radius:6px;
+    text-align:center;
+}
+
+@media(max-width:700px){
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1 id="title">Death Registration</h1>
+    <p id="subtitle">Nagar Panchayat Anandnagar</p>
+</div>
+
+<div class="container">
+
+    <div class="topbar">
+        <h2 id="formTitle">Death Registration Form</h2>
+
+        <button class="lang" onclick="toggleLanguage()" id="langBtn">
+            हिंदी
+        </button>
+    </div>
+
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label id="regLabel">Registration Number</label>
+            <input type="text" id="registrationNumber">
+        </div>
+
+        <div class="form-group">
+            <label id="deathDateLabel">Date of Death</label>
+            <input type="date" id="dateOfDeath">
+        </div>
+
+        <div class="form-group">
+            <label id="registrationDateLabel">Date of Registration</label>
+            <input type="date" id="dateOfRegistration">
+        </div>
+
+        <div class="form-group">
+            <label id="genderLabel">Gender</label>
+            <select id="gender">
+                <option value="">Select</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label id="nameLabel">Name of Deceased</label>
+            <input type="text" id="name">
+        </div>
+
+        <div class="form-group">
+            <label id="fatherLabel">Father's Name</label>
+            <input type="text" id="fatherName">
+        </div>
+
+        <div class="form-group">
+            <label id="motherLabel">Mother's Name</label>
+            <input type="text" id="motherName">
+        </div>
+
+        <div class="form-group">
+            <label id="placeLabel">Place of Death</label>
+            <input type="text" id="placeOfDeath">
+        </div>
+
+        <div class="form-group full">
+            <label id="addressLabel">Permanent Address</label>
+            <textarea id="permanentAddress"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label id="informantNameLabel">Name of Informant</label>
+            <input type="text" id="informantName">
+        </div>
+
+        <div class="form-group">
+            <label id="informantAddressLabel">Address of Informant</label>
+            <textarea id="informantAddress"></textarea>
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        <button class="save" onclick="saveDeathRecord()" id="saveBtn">
+            Save Record
+        </button>
+
+        <button class="reset" onclick="resetForm()" id="resetBtn">
+            Reset
+        </button>
+
+        <button class="back" onclick="window.location.href='index.html'" id="backBtn">
+            Back to Dashboard
+        </button>
+
+    </div>
+
+    <div class="success" id="successMessage">
+        Death record saved successfully.
+    </div>
+
+</div>
+
+<script>
+
+let hindi = false;
+
+function saveDeathRecord(){
+
+    const record = {
+
+        id: Date.now(),
+
+        type: "Death",
+
+        registrationNumber:
+            document.getElementById("registrationNumber").value,
+
+        dateOfDeath:
+            document.getElementById("dateOfDeath").value,
+
+        dateOfRegistration:
+            document.getElementById("dateOfRegistration").value,
+
+        gender:
+            document.getElementById("gender").value,
+
+        name:
+            document.getElementById("name").value,
+
+        fatherName:
+            document.getElementById("fatherName").value,
+
+        motherName:
+            document.getElementById("motherName").value,
+
+        placeOfDeath:
+            document.getElementById("placeOfDeath").value,
+
+        permanentAddress:
+            document.getElementById("permanentAddress").value,
+
+        informantName:
+            document.getElementById("informantName").value,
+
+        informantAddress:
+            document.getElementById("informantAddress").value
+    };
+
+    let records =
+        JSON.parse(localStorage.getItem("deathRecords")) || [];
+
+    records.push(record);
+
+    localStorage.setItem(
+        "deathRecords",
+        JSON.stringify(records)
+    );
+
+    document.getElementById("successMessage").style.display = "block";
+}
+
+function resetForm(){
+
+    document.querySelectorAll("input, textarea, select")
+    .forEach(function(element){
+        element.value = "";
+    });
+
+    document.getElementById("successMessage").style.display = "none";
+}
+
+function toggleLanguage(){
+
+    hindi = !hindi;
+
+    if(hindi){
+
+        document.getElementById("title").innerText =
+            "मृत्यु पंजीकरण";
+
+        document.getElementById("subtitle").innerText =
+            "नगर पंचायत आनंदनगर";
+
+        document.getElementById("formTitle").innerText =
+            "मृत्यु पंजीकरण प्रपत्र";
+
+        document.getElementById("regLabel").innerText =
+            "पंजीकरण संख्या";
+
+        document.getElementById("deathDateLabel").innerText =
+            "मृत्यु की तारीख";
+
+        document.getElementById("registrationDateLabel").innerText =
+            "पंजीकरण की तारीख";
+
+        document.getElementById("genderLabel").innerText =
+            "लिंग";
+
+        document.getElementById("nameLabel").innerText =
+            "मृतक का नाम";
+
+        document.getElementById("fatherLabel").innerText =
+            "पिता का नाम";
+
+        document.getElementById("motherLabel").innerText =
+            "माता का नाम";
+
+        document.getElementById("placeLabel").innerText =
+            "मृत्यु का स्थान";
+
+        document.getElementById("addressLabel").innerText =
+            "स्थायी पता";
+
+        document.getElementById("informantNameLabel").innerText =
+            "सूचनाकर्ता का नाम";
+
+        document.getElementById("informantAddressLabel").innerText =
+            "सूचनाकर्ता का पता";
+
+        document.getElementById("saveBtn").innerText =
+            "रिकॉर्ड सुरक्षित करें";
+
+        document.getElementById("resetBtn").innerText =
+            "रीसेट";
+
+        document.getElementById("backBtn").innerText =
+            "डैशबोर्ड पर वापस जाएं";
+
+        document.getElementById("langBtn").innerText =
+            "English";
+
+    }else{
+
+        location.reload();
+
+    }
+}
+
+</script>
+
+</body>
+</html>
