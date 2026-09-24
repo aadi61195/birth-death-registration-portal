@@ -8,7 +8,7 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Birth Registration</title>
+<title>Search Records</title>
 
 <style>
 
@@ -22,8 +22,6 @@ font-family:Arial,"Noto Sans Devanagari",sans-serif;
 background:#f3f6fa;
 color:#1f2937;
 }
-
-/* HEADER */
 
 .header{
 background:#123b63;
@@ -54,8 +52,6 @@ font-weight:bold;
 cursor:pointer;
 }
 
-/* NAVIGATION */
-
 .nav{
 background:white;
 padding:12px 25px;
@@ -73,19 +69,15 @@ margin-right:8px;
 display:inline-block;
 }
 
-/* MAIN */
-
 .container{
-max-width:1100px;
+max-width:1200px;
 margin:25px auto;
 padding:0 18px;
 }
 
-/* FORM CARD */
-
 .card{
 background:white;
-padding:25px;
+padding:22px;
 border-radius:10px;
 box-shadow:0 2px 8px #00000012;
 }
@@ -93,98 +85,110 @@ box-shadow:0 2px 8px #00000012;
 .card h2{
 margin-top:0;
 color:#123b63;
-border-bottom:2px solid #eef4f9;
-padding-bottom:12px;
 }
 
-/* FORM */
-
-.form-grid{
+.search-box{
 display:grid;
-grid-template-columns:
-repeat(2,1fr);
-gap:18px;
+grid-template-columns:2fr 1fr auto;
+gap:10px;
+margin-bottom:20px;
 }
 
-.field label{
-display:block;
-font-weight:bold;
-margin-bottom:6px;
-}
-
-.field input,
-.field select,
-.field textarea{
-width:100%;
+.search-box input,
+.search-box select{
 padding:11px;
 border:1px solid #cbd5e1;
 border-radius:6px;
 font-size:15px;
 }
 
-.field textarea{
-min-height:85px;
-resize:vertical;
-}
-
-.full{
-grid-column:1/-1;
-}
-
-/* BUTTONS */
-
-.buttons{
-margin-top:20px;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-}
-
-button{
-border:0;
+.search-button{
+background:#1769aa;
+color:white;
+border:none;
 border-radius:6px;
 padding:11px 18px;
 font-weight:bold;
 cursor:pointer;
 }
 
-.save{
-background:#1769aa;
-color:white;
+table{
+width:100%;
+border-collapse:collapse;
 }
 
-.reset{
-background:#e8eef5;
-color:#123b63;
+th,
+td{
+padding:11px;
+border-bottom:1px solid #e5e7eb;
+text-align:left;
+font-size:14px;
 }
 
-.back{
-background:#64748b;
-color:white;
+th{
+background:#eef4f9;
 }
 
-/* MESSAGE */
-
-.message{
-display:none;
-margin-top:20px;
-padding:15px;
-border-radius:6px;
-background:#e8f5e9;
-color:#166534;
+.badge{
+display:inline-block;
+padding:4px 9px;
+border-radius:20px;
+background:#e6f4ea;
+color:#137333;
 font-weight:bold;
 }
 
-/* MOBILE */
+.no-records{
+text-align:center;
+padding:30px;
+color:#64748b;
+}
+
+.view-button{
+background:#1769aa;
+color:white;
+border:none;
+border-radius:5px;
+padding:6px 10px;
+cursor:pointer;
+}
+
+.details{
+margin-top:20px;
+display:none;
+background:#f8fafc;
+border:1px solid #dbe3ec;
+border-radius:8px;
+padding:20px;
+}
+
+.details-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+.detail{
+background:white;
+padding:12px;
+border-radius:6px;
+}
+
+.detail strong{
+display:block;
+color:#64748b;
+font-size:13px;
+margin-bottom:5px;
+}
 
 @media(max-width:700px){
 
-.form-grid{
+.search-box{
 grid-template-columns:1fr;
 }
 
-.full{
-grid-column:auto;
+.details-grid{
+grid-template-columns:1fr;
 }
 
 .header{
@@ -199,18 +203,15 @@ gap:12px;
 
 </head>
 
-
 <body>
 
-
-<!-- HEADER -->
 
 <div class="header">
 
 <div>
 
 <h1 id="title">
-Birth Registration
+Birth & Death Records
 </h1>
 
 <p id="subtitle">
@@ -231,8 +232,6 @@ id="languageButton">
 </div>
 
 
-<!-- NAVIGATION -->
-
 <div class="nav">
 
 <a href="index.html"
@@ -249,272 +248,113 @@ Birth Registration
 
 </a>
 
-</div>
+<a href="records.html"
+id="recordsLink">
 
-
-<!-- MAIN -->
-
-<div class="container">
-
-<div class="card">
-
-<h2 id="formTitle">
-Birth Registration Form
-</h2>
-
-
-<form id="birthForm">
-
-
-<div class="form-grid">
-
-
-<!-- REGISTRATION NUMBER -->
-
-<div class="field">
-
-<label id="regNoLabel">
-Registration Number *
-</label>
-
-<input
-type="text"
-id="registrationNumber"
-required
-placeholder="Enter registration number">
-
-</div>
-
-
-<!-- DATE OF BIRTH -->
-
-<div class="field">
-
-<label id="dobLabel">
-Date of Birth *
-</label>
-
-<input
-type="date"
-id="dateOfBirth"
-required>
-
-</div>
-
-
-<!-- DATE OF REGISTRATION -->
-
-<div class="field">
-
-<label id="regDateLabel">
-Date of Registration *
-</label>
-
-<input
-type="date"
-id="dateOfRegistration"
-required>
-
-</div>
-
-
-<!-- GENDER -->
-
-<div class="field">
-
-<label id="genderLabel">
-Gender *
-</label>
-
-<select
-id="gender"
-required>
-
-<option value="">
-Select Gender
-</option>
-
-<option value="Male">
-Male / पुरुष
-</option>
-
-<option value="Female">
-Female / महिला
-</option>
-
-<option value="Other">
-Other / अन्य
-</option>
-
-</select>
-
-</div>
-
-
-<!-- NAME -->
-
-<div class="field full">
-
-<label id="nameLabel">
-Name of Child *
-</label>
-
-<input
-type="text"
-id="name"
-required
-placeholder="Enter name">
-
-</div>
-
-
-<!-- FATHER -->
-
-<div class="field">
-
-<label id="fatherLabel">
-Father's Name
-</label>
-
-<input
-type="text"
-id="fatherName"
-placeholder="Enter father's name">
-
-</div>
-
-
-<!-- MOTHER -->
-
-<div class="field">
-
-<label id="motherLabel">
-Mother's Name
-</label>
-
-<input
-type="text"
-id="motherName"
-placeholder="Enter mother's name">
-
-</div>
-
-
-<!-- PLACE -->
-
-<div class="field full">
-
-<label id="placeLabel">
-Place of Birth *
-</label>
-
-<input
-type="text"
-id="placeOfBirth"
-required
-placeholder="Enter place of birth">
-
-</div>
-
-
-<!-- ADDRESS -->
-
-<div class="field full">
-
-<label id="addressLabel">
-Permanent Address *
-</label>
-
-<textarea
-id="permanentAddress"
-required
-placeholder="Enter permanent address"></textarea>
-
-</div>
-
-
-<!-- INFORMANT -->
-
-<div class="field">
-
-<label id="informantLabel">
-Name of Informant *
-</label>
-
-<input
-type="text"
-id="informantName"
-required
-placeholder="Enter informant name">
-
-</div>
-
-
-<!-- INFORMANT ADDRESS -->
-
-<div class="field">
-
-<label id="informantAddressLabel">
-Address of Informant *
-</label>
-
-<textarea
-id="informantAddress"
-required
-placeholder="Enter informant address"></textarea>
-
-</div>
-
-
-</div>
-
-
-<!-- BUTTONS -->
-
-<div class="buttons">
-
-<button
-type="submit"
-class="save"
-id="saveButton">
-
-Save Birth Record
-
-</button>
-
-<button
-type="reset"
-class="reset"
-id="resetButton">
-
-Reset
-
-</button>
-
-<a href="index.html">
-
-<button
-type="button"
-class="back"
-id="backButton">
-
-Back to Dashboard
-
-</button>
+Search Records
 
 </a>
 
 </div>
 
 
-</form>
+<div class="container">
+
+<div class="card">
+
+<h2 id="pageTitle">
+Search Registration Records
+</h2>
+
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search by name, registration number, father or mother">
+
+<select id="searchType">
+
+<option value="all">
+All Records
+</option>
+
+<option value="birth">
+Birth Records
+</option>
+
+<option value="death">
+Death Records
+</option>
+
+</select>
+
+<button
+class="search-button"
+onclick="searchRecords()"
+id="searchButton">
+
+Search
+
+</button>
+
+</div>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th id="typeHead">
+Type
+</th>
+
+<th id="regHead">
+Registration Number
+</th>
+
+<th id="nameHead">
+Name
+</th>
+
+<th id="dateHead">
+Date
+</th>
+
+<th id="genderHead">
+Gender
+</th>
+
+<th id="actionHead">
+Action
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="results">
+
+</tbody>
+
+</table>
 
 
 <div
-class="message"
-id="successMessage">
+class="details"
+id="details">
 
-Record saved successfully.
+<h3 id="detailsTitle">
+Record Details
+</h3>
+
+<div
+class="details-grid"
+id="detailsGrid">
+</div>
 
 </div>
 
@@ -526,134 +366,324 @@ Record saved successfully.
 
 <script>
 
-/* LANGUAGE */
-
 let hindi=false;
 
 
-/* SAVE RECORD */
+/* LOAD RECORDS */
 
-document
-.getElementById("birthForm")
-.addEventListener("submit",function(e){
+function getAllRecords(){
 
-e.preventDefault();
-
-
-/* GET EXISTING RECORDS */
-
-let records =
+let births =
 JSON.parse(
 localStorage.getItem("birthRecords") || "[]"
 );
 
+let deaths =
+JSON.parse(
+localStorage.getItem("deathRecords") || "[]"
+);
 
-/* CREATE RECORD */
+return births.concat(deaths);
 
-let record={
+}
 
-id:Date.now(),
 
-type:"Birth",
+/* SEARCH */
 
-registrationNumber:
+function searchRecords(){
+
+let query =
 document.getElementById(
-"registrationNumber"
-).value,
+"searchInput"
+).value.toLowerCase().trim();
 
-dateOfBirth:
+let type =
 document.getElementById(
-"dateOfBirth"
-).value,
+"searchType"
+).value;
 
-dateOfRegistration:
+
+let records =
+getAllRecords();
+
+
+if(type==="birth"){
+
+records =
+records.filter(
+r => r.type==="Birth"
+);
+
+}
+
+
+if(type==="death"){
+
+records =
+records.filter(
+r => r.type==="Death"
+);
+
+}
+
+
+if(query){
+
+records =
+records.filter(r =>
+
+Object
+.values(r)
+.join(" ")
+.toLowerCase()
+.includes(query)
+
+);
+
+}
+
+
+displayRecords(records);
+
+}
+
+
+/* DISPLAY */
+
+function displayRecords(records){
+
+let container =
 document.getElementById(
-"dateOfRegistration"
-).value,
-
-gender:
-document.getElementById(
-"gender"
-).value,
-
-name:
-document.getElementById(
-"name"
-).value,
-
-fatherName:
-document.getElementById(
-"fatherName"
-).value,
-
-motherName:
-document.getElementById(
-"motherName"
-).value,
-
-placeOfBirth:
-document.getElementById(
-"placeOfBirth"
-).value,
-
-permanentAddress:
-document.getElementById(
-"permanentAddress"
-).value,
-
-informantName:
-document.getElementById(
-"informantName"
-).value,
-
-informantAddress:
-document.getElementById(
-"informantAddress"
-).value
-
-};
-
-
-/* SAVE */
-
-records.push(record);
-
-localStorage.setItem(
-"birthRecords",
-JSON.stringify(records)
+"results"
 );
 
 
-/* MESSAGE */
+if(records.length===0){
 
-document.getElementById(
-"successMessage"
-).style.display="block";
+container.innerHTML=`
 
+<tr>
 
-document.getElementById(
-"successMessage"
-).innerText=
+<td colspan="6"
+class="no-records">
 
+${
 hindi
-
 ?
-
-"जन्म रिकॉर्ड सफलतापूर्वक सुरक्षित किया गया।"
-
+"कोई रिकॉर्ड नहीं मिला।"
 :
+"No records found."
+}
 
-"Birth record saved successfully.";
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
 
 
-/* CLEAR FORM */
+container.innerHTML =
+records.map(
+(r,index)=>`
 
-document
-.getElementById("birthForm")
-.reset();
+<tr>
+
+<td>
+
+<span class="badge">
+
+${
+hindi
+?
+(r.type==="Birth"
+?"जन्म"
+:"मृत्यु")
+:
+r.type
+}
+
+</span>
+
+</td>
+
+<td>
+${r.registrationNumber || r.regNo || ""}
+</td>
+
+<td>
+${r.name || ""}
+</td>
+
+<td>
+${r.dateOfBirth || r.eventDate || ""}
+</td>
+
+<td>
+${r.gender || ""}
+</td>
+
+<td>
+
+<button
+class="view-button"
+onclick="viewRecord(${index})">
+
+${
+hindi
+?
+"देखें"
+:
+"View"
+}
+
+</button>
+
+</td>
+
+</tr>
+
+`
+).join("");
+
+window.currentRecords=records;
+
+}
 
 
+/* VIEW */
+
+function viewRecord(index){
+
+let r =
+window.currentRecords[index];
+
+
+let details =
+document.getElementById(
+"details"
+);
+
+let grid =
+document.getElementById(
+"detailsGrid"
+);
+
+
+let fields=[];
+
+
+if(r.type==="Birth"){
+
+fields=[
+
+["Registration Number / पंजीकरण संख्या",
+r.registrationNumber],
+
+["Date of Birth / जन्म की तारीख",
+r.dateOfBirth],
+
+["Date of Registration / पंजीकरण की तारीख",
+r.dateOfRegistration],
+
+["Gender / लिंग",
+r.gender],
+
+["Name / नाम",
+r.name],
+
+["Father's Name / पिता का नाम",
+r.fatherName],
+
+["Mother's Name / माता का नाम",
+r.motherName],
+
+["Place of Birth / जन्म स्थान",
+r.placeOfBirth],
+
+["Permanent Address / स्थायी पता",
+r.permanentAddress],
+
+["Informant / सूचक",
+r.informantName],
+
+["Informant Address / सूचक का पता",
+r.informantAddress]
+
+];
+
+}
+
+else{
+
+fields=[
+
+["Registration Number / पंजीकरण संख्या",
+r.registrationNumber],
+
+["Date / तारीख",
+r.dateOfDeath],
+
+["Date of Registration / पंजीकरण की तारीख",
+r.dateOfRegistration],
+
+["Gender / लिंग",
+r.gender],
+
+["Name / नाम",
+r.name],
+
+["Father's Name / पिता का नाम",
+r.fatherName],
+
+["Mother's Name / माता का नाम",
+r.motherName],
+
+["Place of Death / मृत्यु स्थान",
+r.placeOfDeath],
+
+["Permanent Address / स्थायी पता",
+r.permanentAddress],
+
+["Informant / सूचक",
+r.informantName],
+
+["Informant Address / सूचक का पता",
+r.informantAddress]
+
+];
+
+}
+
+
+grid.innerHTML =
+fields.map(
+f=>`
+
+<div class="detail">
+
+<strong>
+${f[0]}
+</strong>
+
+${f[1] || "-"}
+
+</div>
+
+`
+).join("");
+
+
+details.style.display="block";
+
+details.scrollIntoView({
+behavior:"smooth"
 });
+
+}
 
 
 /* LANGUAGE */
@@ -666,7 +696,7 @@ hindi=!hindi;
 if(hindi){
 
 document.getElementById("title").innerText=
-"जन्म पंजीकरण";
+"जन्म एवं मृत्यु अभिलेख";
 
 document.getElementById("subtitle").innerText=
 "नगर पंचायत आनंदनगर";
@@ -680,50 +710,32 @@ document.getElementById("dashboardLink").innerText=
 document.getElementById("birthLink").innerText=
 "जन्म पंजीकरण";
 
-document.getElementById("formTitle").innerText=
-"जन्म पंजीकरण प्रपत्र";
+document.getElementById("recordsLink").innerText=
+"रिकॉर्ड खोजें";
 
-document.getElementById("regNoLabel").innerText=
-"पंजीकरण संख्या *";
+document.getElementById("pageTitle").innerText=
+"पंजीकरण रिकॉर्ड खोजें";
 
-document.getElementById("dobLabel").innerText=
-"जन्म की तारीख *";
+document.getElementById("searchButton").innerText=
+"खोजें";
 
-document.getElementById("regDateLabel").innerText=
-"पंजीकरण की तारीख *";
+document.getElementById("typeHead").innerText=
+"प्रकार";
 
-document.getElementById("genderLabel").innerText=
-"लिंग *";
+document.getElementById("regHead").innerText=
+"पंजीकरण संख्या";
 
-document.getElementById("nameLabel").innerText=
-"बच्चे का नाम *";
+document.getElementById("nameHead").innerText=
+"नाम";
 
-document.getElementById("fatherLabel").innerText=
-"पिता का नाम";
+document.getElementById("dateHead").innerText=
+"तारीख";
 
-document.getElementById("motherLabel").innerText=
-"माता का नाम";
+document.getElementById("genderHead").innerText=
+"लिंग";
 
-document.getElementById("placeLabel").innerText=
-"जन्म स्थान *";
-
-document.getElementById("addressLabel").innerText=
-"स्थायी पता *";
-
-document.getElementById("informantLabel").innerText=
-"सूचक का नाम *";
-
-document.getElementById("informantAddressLabel").innerText=
-"सूचक का पता *";
-
-document.getElementById("saveButton").innerText=
-"जन्म रिकॉर्ड सुरक्षित करें";
-
-document.getElementById("resetButton").innerText=
-"रीसेट";
-
-document.getElementById("backButton").innerText=
-"डैशबोर्ड पर वापस जाएँ";
+document.getElementById("actionHead").innerText=
+"कार्यवाही";
 
 }
 
@@ -733,7 +745,15 @@ location.reload();
 
 }
 
+
+searchRecords();
+
 }
+
+
+/* INITIAL */
+
+searchRecords();
 
 </script>
 
