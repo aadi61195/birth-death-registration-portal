@@ -379,7 +379,8 @@ Total Birth Records
 </div>
 
 <div
-class="stat-number">
+class="stat-number"
+id="birthCount">
 
 0
 
@@ -399,7 +400,8 @@ Total Death Records
 </div>
 
 <div
-class="stat-number">
+class="stat-number"
+id="deathCount">
 
 0
 
@@ -692,7 +694,22 @@ hindi
 );
 
 }
+function updateDashboardStats() {
 
+    const birthRecords =
+        JSON.parse(localStorage.getItem("birthRecords")) || [];
+
+    const deathRecords =
+        JSON.parse(localStorage.getItem("deathRecords")) || [];
+
+    document.getElementById("birthCount").innerText =
+        birthRecords.length;
+
+    document.getElementById("deathCount").innerText =
+        deathRecords.length;
+}
+
+updateDashboardStats();
 </script>
 
 </body>
