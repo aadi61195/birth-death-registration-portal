@@ -420,8 +420,7 @@ Total Records
 
 </div>
 
-<div
-class="stat-number">
+<div class="stat-number" id="totalCount">
 
 0
 
@@ -707,6 +706,8 @@ function updateDashboardStats() {
 
     document.getElementById("deathCount").innerText =
         deathRecords.length;
+    document.getElementById("totalCount").innerText =
+    birthRecords.length + deathRecords.length;
 }
 
 updateDashboardStats();
