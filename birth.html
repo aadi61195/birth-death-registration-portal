@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Birth Registration</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,"Noto Sans Devanagari",sans-serif;
+background:#f3f6fa;
+color:#1f2937;
+}
+
+/* HEADER */
+
+.header{
+background:#123b63;
+color:white;
+padding:18px 25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.header h1{
+margin:0;
+font-size:22px;
+}
+
+.header p{
+margin:5px 0 0;
+opacity:.85;
+}
+
+.lang{
+background:white;
+color:#123b63;
+border:0;
+padding:9px 14px;
+border-radius:6px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* NAVIGATION */
+
+.nav{
+background:white;
+padding:12px 25px;
+border-bottom:1px solid #ddd;
+}
+
+.nav a{
+text-decoration:none;
+background:#e8eef5;
+color:#123b63;
+padding:10px 15px;
+border-radius:6px;
+font-weight:bold;
+margin-right:8px;
+display:inline-block;
+}
+
+/* MAIN */
+
+.container{
+max-width:1100px;
+margin:25px auto;
+padding:0 18px;
+}
+
+/* FORM CARD */
+
+.card{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 2px 8px #00000012;
+}
+
+.card h2{
+margin-top:0;
+color:#123b63;
+border-bottom:2px solid #eef4f9;
+padding-bottom:12px;
+}
+
+/* FORM */
+
+.form-grid{
+display:grid;
+grid-template-columns:
+repeat(2,1fr);
+gap:18px;
+}
+
+.field label{
+display:block;
+font-weight:bold;
+margin-bottom:6px;
+}
+
+.field input,
+.field select,
+.field textarea{
+width:100%;
+padding:11px;
+border:1px solid #cbd5e1;
+border-radius:6px;
+font-size:15px;
+}
+
+.field textarea{
+min-height:85px;
+resize:vertical;
+}
+
+.full{
+grid-column:1/-1;
+}
+
+/* BUTTONS */
+
+.buttons{
+margin-top:20px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+button{
+border:0;
+border-radius:6px;
+padding:11px 18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.save{
+background:#1769aa;
+color:white;
+}
+
+.reset{
+background:#e8eef5;
+color:#123b63;
+}
+
+.back{
+background:#64748b;
+color:white;
+}
+
+/* MESSAGE */
+
+.message{
+display:none;
+margin-top:20px;
+padding:15px;
+border-radius:6px;
+background:#e8f5e9;
+color:#166534;
+font-weight:bold;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.full{
+grid-column:auto;
+}
+
+.header{
+flex-direction:column;
+align-items:flex-start;
+gap:12px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div>
+
+<h1 id="title">
+Birth Registration
+</h1>
+
+<p id="subtitle">
+Nagar Panchayat Anandnagar
+</p>
+
+</div>
+
+<button
+class="lang"
+onclick="toggleLanguage()"
+id="languageButton">
+
+हिंदी
+
+</button>
+
+</div>
+
+
+<!-- NAVIGATION -->
+
+<div class="nav">
+
+<a href="index.html"
+id="dashboardLink">
+
+Dashboard
+
+</a>
+
+<a href="birth.html"
+id="birthLink">
+
+Birth Registration
+
+</a>
+
+</div>
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+<div class="card">
+
+<h2 id="formTitle">
+Birth Registration Form
+</h2>
+
+
+<form id="birthForm">
+
+
+<div class="form-grid">
+
+
+<!-- REGISTRATION NUMBER -->
+
+<div class="field">
+
+<label id="regNoLabel">
+Registration Number *
+</label>
+
+<input
+type="text"
+id="registrationNumber"
+required
+placeholder="Enter registration number">
+
+</div>
+
+
+<!-- DATE OF BIRTH -->
+
+<div class="field">
+
+<label id="dobLabel">
+Date of Birth *
+</label>
+
+<input
+type="date"
+id="dateOfBirth"
+required>
+
+</div>
+
+
+<!-- DATE OF REGISTRATION -->
+
+<div class="field">
+
+<label id="regDateLabel">
+Date of Registration *
+</label>
+
+<input
+type="date"
+id="dateOfRegistration"
+required>
+
+</div>
+
+
+<!-- GENDER -->
+
+<div class="field">
+
+<label id="genderLabel">
+Gender *
+</label>
+
+<select
+id="gender"
+required>
+
+<option value="">
+Select Gender
+</option>
+
+<option value="Male">
+Male / पुरुष
+</option>
+
+<option value="Female">
+Female / महिला
+</option>
+
+<option value="Other">
+Other / अन्य
+</option>
+
+</select>
+
+</div>
+
+
+<!-- NAME -->
+
+<div class="field full">
+
+<label id="nameLabel">
+Name of Child *
+</label>
+
+<input
+type="text"
+id="name"
+required
+placeholder="Enter name">
+
+</div>
+
+
+<!-- FATHER -->
+
+<div class="field">
+
+<label id="fatherLabel">
+Father's Name
+</label>
+
+<input
+type="text"
+id="fatherName"
+placeholder="Enter father's name">
+
+</div>
+
+
+<!-- MOTHER -->
+
+<div class="field">
+
+<label id="motherLabel">
+Mother's Name
+</label>
+
+<input
+type="text"
+id="motherName"
+placeholder="Enter mother's name">
+
+</div>
+
+
+<!-- PLACE -->
+
+<div class="field full">
+
+<label id="placeLabel">
+Place of Birth *
+</label>
+
+<input
+type="text"
+id="placeOfBirth"
+required
+placeholder="Enter place of birth">
+
+</div>
+
+
+<!-- ADDRESS -->
+
+<div class="field full">
+
+<label id="addressLabel">
+Permanent Address *
+</label>
+
+<textarea
+id="permanentAddress"
+required
+placeholder="Enter permanent address"></textarea>
+
+</div>
+
+
+<!-- INFORMANT -->
+
+<div class="field">
+
+<label id="informantLabel">
+Name of Informant *
+</label>
+
+<input
+type="text"
+id="informantName"
+required
+placeholder="Enter informant name">
+
+</div>
+
+
+<!-- INFORMANT ADDRESS -->
+
+<div class="field">
+
+<label id="informantAddressLabel">
+Address of Informant *
+</label>
+
+<textarea
+id="informantAddress"
+required
+placeholder="Enter informant address"></textarea>
+
+</div>
+
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="buttons">
+
+<button
+type="submit"
+class="save"
+id="saveButton">
+
+Save Birth Record
+
+</button>
+
+<button
+type="reset"
+class="reset"
+id="resetButton">
+
+Reset
+
+</button>
+
+<a href="index.html">
+
+<button
+type="button"
+class="back"
+id="backButton">
+
+Back to Dashboard
+
+</button>
+
+</a>
+
+</div>
+
+
+</form>
+
+
+<div
+class="message"
+id="successMessage">
+
+Record saved successfully.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+/* LANGUAGE */
+
+let hindi=false;
+
+
+/* SAVE RECORD */
+
+document
+.getElementById("birthForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+
+/* GET EXISTING RECORDS */
+
+let records =
+JSON.parse(
+localStorage.getItem("birthRecords") || "[]"
+);
+
+
+/* CREATE RECORD */
+
+let record={
+
+id:Date.now(),
+
+type:"Birth",
+
+registrationNumber:
+document.getElementById(
+"registrationNumber"
+).value,
+
+dateOfBirth:
+document.getElementById(
+"dateOfBirth"
+).value,
+
+dateOfRegistration:
+document.getElementById(
+"dateOfRegistration"
+).value,
+
+gender:
+document.getElementById(
+"gender"
+).value,
+
+name:
+document.getElementById(
+"name"
+).value,
+
+fatherName:
+document.getElementById(
+"fatherName"
+).value,
+
+motherName:
+document.getElementById(
+"motherName"
+).value,
+
+placeOfBirth:
+document.getElementById(
+"placeOfBirth"
+).value,
+
+permanentAddress:
+document.getElementById(
+"permanentAddress"
+).value,
+
+informantName:
+document.getElementById(
+"informantName"
+).value,
+
+informantAddress:
+document.getElementById(
+"informantAddress"
+).value
+
+};
+
+
+/* SAVE */
+
+records.push(record);
+
+localStorage.setItem(
+"birthRecords",
+JSON.stringify(records)
+);
+
+
+/* MESSAGE */
+
+document.getElementById(
+"successMessage"
+).style.display="block";
+
+
+document.getElementById(
+"successMessage"
+).innerText=
+
+hindi
+
+?
+
+"जन्म रिकॉर्ड सफलतापूर्वक सुरक्षित किया गया।"
+
+:
+
+"Birth record saved successfully.";
+
+
+/* CLEAR FORM */
+
+document
+.getElementById("birthForm")
+.reset();
+
+
+});
+
+
+/* LANGUAGE */
+
+function toggleLanguage(){
+
+hindi=!hindi;
+
+
+if(hindi){
+
+document.getElementById("title").innerText=
+"जन्म पंजीकरण";
+
+document.getElementById("subtitle").innerText=
+"नगर पंचायत आनंदनगर";
+
+document.getElementById("languageButton").innerText=
+"English";
+
+document.getElementById("dashboardLink").innerText=
+"डैशबोर्ड";
+
+document.getElementById("birthLink").innerText=
+"जन्म पंजीकरण";
+
+document.getElementById("formTitle").innerText=
+"जन्म पंजीकरण प्रपत्र";
+
+document.getElementById("regNoLabel").innerText=
+"पंजीकरण संख्या *";
+
+document.getElementById("dobLabel").innerText=
+"जन्म की तारीख *";
+
+document.getElementById("regDateLabel").innerText=
+"पंजीकरण की तारीख *";
+
+document.getElementById("genderLabel").innerText=
+"लिंग *";
+
+document.getElementById("nameLabel").innerText=
+"बच्चे का नाम *";
+
+document.getElementById("fatherLabel").innerText=
+"पिता का नाम";
+
+document.getElementById("motherLabel").innerText=
+"माता का नाम";
+
+document.getElementById("placeLabel").innerText=
+"जन्म स्थान *";
+
+document.getElementById("addressLabel").innerText=
+"स्थायी पता *";
+
+document.getElementById("informantLabel").innerText=
+"सूचक का नाम *";
+
+document.getElementById("informantAddressLabel").innerText=
+"सूचक का पता *";
+
+document.getElementById("saveButton").innerText=
+"जन्म रिकॉर्ड सुरक्षित करें";
+
+document.getElementById("resetButton").innerText=
+"रीसेट";
+
+document.getElementById("backButton").innerText=
+"डैशबोर्ड पर वापस जाएँ";
+
+}
+
+else{
+
+location.reload();
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
