@@ -714,6 +714,58 @@ function updateDashboardStats() {
 }
 
 updateDashboardStats();
+    function loadRecentRegistrations() {
+
+    const birthRecords =
+        JSON.parse(localStorage.getItem("birthRecords")) || [];
+
+    const deathRecords =
+        JSON.parse(localStorage.getItem("deathRecords")) || [];
+
+    const allRecords =
+        birthRecords.concat(deathRecords);
+
+    allRecords.sort(function(a, b) {
+        return b.id - a.id;
+    });
+
+    const recentRecords =
+        allRecords.slice(0, 5);
+
+    const tbody =
+        document.getElementById("recentRecordsBody");
+
+    tbody.innerHTML = "";
+
+    if (recentRecords.length === 0) {
+
+        tbody.innerHTML =
+            '<tr><td colspan="4" style="text-align:center;color:#64748b;">No records available</td></tr>';
+
+        return;
+    }
+
+    recentRecords.forEach(function(record) {
+
+        const row = document.createElement("tr");
+
+        const date =
+            record.type === "Birth"
+            ? record.dateOfBirth
+            : record.dateOfDeath;
+
+        row.innerHTML = `
+            <td>${record.type}</td>
+            <td>${record.registrationNumber || ""}</td>
+            <td>${record.name || ""}</td>
+            <td>${date || ""}</td>
+        `;
+
+        tbody.appendChild(row);
+    });
+}
+
+loadRecentRegistrations();
 </script>
 
 </body>
