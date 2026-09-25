@@ -529,7 +529,6 @@ ${r.gender || ""}
 <td>
 
 <button
-class="view-button"
 onclick="viewRecord(${index})">
 
 ${
@@ -538,6 +537,20 @@ hindi
 "देखें"
 :
 "View"
+}
+
+</button>
+
+<button
+onclick="editRecord(${index})"
+style="margin-left:6px;background:#f0ad4e;color:white;">
+
+${
+hindi
+?
+"संपादित करें"
+:
+"Edit"
 }
 
 </button>
