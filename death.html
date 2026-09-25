@@ -291,12 +291,37 @@ function saveDeathRecord(){
     let records =
         JSON.parse(localStorage.getItem("deathRecords")) || [];
 
-    records.push(record);
+    const params =
+    new URLSearchParams(window.location.search);
 
-    localStorage.setItem(
-        "deathRecords",
-        JSON.stringify(records)
-    );
+const editId =
+    params.get("edit");
+
+if (editId) {
+
+    const index =
+        records.findIndex(function(r) {
+            return String(r.id) === String(editId);
+        });
+
+    if (index !== -1) {
+
+        record.id =
+            records[index].id;
+
+        records[index] =
+            record;
+    }
+
+} else {
+
+    records.push(record);
+}
+
+localStorage.setItem(
+    "deathRecords",
+    JSON.stringify(records)
+);
 
     document.getElementById("successMessage").style.display = "block";
 }
