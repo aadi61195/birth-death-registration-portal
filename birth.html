@@ -734,6 +734,62 @@ location.reload();
 }
 
 }
+  function loadBirthRecordForEdit() {
+
+    const params = new URLSearchParams(window.location.search);
+    const editId = params.get("edit");
+
+    if (!editId) {
+        return;
+    }
+
+    const records =
+        JSON.parse(localStorage.getItem("birthRecords")) || [];
+
+    const record =
+        records.find(function(r) {
+            return String(r.id) === String(editId);
+        });
+
+    if (!record) {
+        return;
+    }
+
+    document.getElementById("registrationNumber").value =
+        record.registrationNumber || "";
+
+    document.getElementById("dateOfBirth").value =
+        record.dateOfBirth || "";
+
+    document.getElementById("dateOfRegistration").value =
+        record.dateOfRegistration || "";
+
+    document.getElementById("gender").value =
+        record.gender || "";
+
+    document.getElementById("name").value =
+        record.name || "";
+
+    document.getElementById("fatherName").value =
+        record.fatherName || "";
+
+    document.getElementById("motherName").value =
+        record.motherName || "";
+
+    document.getElementById("placeOfBirth").value =
+        record.placeOfBirth || "";
+
+    document.getElementById("permanentAddress").value =
+        record.permanentAddress || "";
+
+    document.getElementById("informantName").value =
+        record.informantName || "";
+
+    document.getElementById("informantAddress").value =
+        record.informantAddress || "";
+}
+
+loadBirthRecordForEdit();
 
 </script>
 
