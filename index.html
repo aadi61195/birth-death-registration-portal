@@ -714,19 +714,6 @@ function updateDashboardStats() {
 }
 
 updateDashboardStats();
-    function updateDashboardStats() {
-
-    const birthRecords =
-        JSON.parse(localStorage.getItem("birthRecords")) || [];
-
-    const deathRecords =
-        JSON.parse(localStorage.getItem("deathRecords")) || [];
-
-    document.getElementById("totalCount").innerText =
-        birthRecords.length + deathRecords.length;
-}
-
-updateDashboardStats();
 </script>
 
 </body>
