@@ -767,6 +767,25 @@ searchRecords();
 /* INITIAL */
 
 searchRecords();
+  function editRecord(index) {
+
+    const record = window.currentRecords[index];
+
+    if (!record) {
+        return;
+    }
+
+    if (record.type === "Birth") {
+
+        window.location.href =
+            "birth.html?edit=" + record.id;
+
+    } else if (record.type === "Death") {
+
+        window.location.href =
+            "death.html?edit=" + record.id;
+    }
+}
 
 </script>
 
