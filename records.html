@@ -885,7 +885,174 @@ searchRecords();
 
     searchRecords();
 }
+function printRecord(index) {
 
+    const record =
+        window.currentRecords[index];
+
+    if (!record) {
+        return;
+    }
+
+    const printWindow =
+        window.open("", "_blank");
+
+    if (!printWindow) {
+        alert("Please allow pop-ups for this portal.");
+        return;
+    }
+
+    const title =
+        record.type === "Birth"
+        ? "Birth Registration Record / जन्म पंजीकरण अभिलेख"
+        : "Death Registration Record / मृत्यु पंजीकरण अभिलेख";
+
+    let dateLabel =
+        record.type === "Birth"
+        ? "Date of Birth / जन्म की तारीख"
+        : "Date of Death / मृत्यु की तारीख";
+
+    let placeLabel =
+        record.type === "Birth"
+        ? "Place of Birth / जन्म स्थान"
+        : "Place of Death / मृत्यु स्थान";
+
+    let dateValue =
+        record.type === "Birth"
+        ? record.dateOfBirth
+        : record.dateOfDeath;
+
+    let placeValue =
+        record.type === "Birth"
+        ? record.placeOfBirth
+        : record.placeOfDeath;
+
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>${title}</title>
+
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 40px;
+                    color: #222;
+                }
+
+                h1 {
+                    text-align: center;
+                    font-size: 22px;
+                    margin-bottom: 30px;
+                }
+
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                td {
+                    border: 1px solid #999;
+                    padding: 10px;
+                }
+
+                td:first-child {
+                    font-weight: bold;
+                    width: 40%;
+                    background: #f2f2f2;
+                }
+
+                .footer {
+                    margin-top: 50px;
+                    text-align: right;
+                }
+
+                @media print {
+                    body {
+                        padding: 20px;
+                    }
+                }
+            </style>
+        </head>
+
+        <body>
+
+            <h1>${title}</h1>
+
+            <table>
+
+                <tr>
+                    <td>Registration Number / पंजीकरण संख्या</td>
+                    <td>${record.registrationNumber || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>${dateLabel}</td>
+                    <td>${dateValue || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>Date of Registration / पंजीकरण की तारीख</td>
+                    <td>${record.dateOfRegistration || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>Gender / लिंग</td>
+                    <td>${record.gender || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>Name / नाम</td>
+                    <td>${record.name || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>Father's Name / पिता का नाम</td>
+                    <td>${record.fatherName || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>Mother's Name / माता का नाम</td>
+                    <td>${record.motherName || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>${placeLabel}</td>
+                    <td>${placeValue || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>Permanent Address / स्थायी पता</td>
+                    <td>${record.permanentAddress || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>Informant Name / सूचनाकर्ता का नाम</td>
+                    <td>${record.informantName || ""}</td>
+                </tr>
+
+                <tr>
+                    <td>Informant Address / सूचनाकर्ता का पता</td>
+                    <td>${record.informantAddress || ""}</td>
+                </tr>
+
+            </table>
+
+            <div class="footer">
+                Authorized Signature / अधिकृत हस्ताक्षर
+            </div>
+
+        </body>
+        </html>
+    `);
+
+    printWindow.document.close();
+
+    printWindow.focus();
+
+    setTimeout(function() {
+        printWindow.print();
+    }, 500);
+}
 </script>
 
 </body>
